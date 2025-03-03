@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Lcreator - Editor</title>
+    <script src="lib/blockly_compressed.js"></script>
+    <script src="lib/blocks_compressed.js"></script>
+    <script src="lib/lua_compressed.js"></script>
+    <script src="lib/en.js"></script>
+    <script src="lib/jszip.min.js"></script>
+    <script src="lib/FileSaver.js"></script>
+
+    <style>
+        html, body {
+            color: green;
+            background-color: black;
+            font-family: monospace;
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+        h1 {
+            text-align: center;
+        }
+        table {
+            height: 100%;
+            width: 100%;
+        }
+        #blocklyArea {
+            height: 99%;
+        }
+    </style>
+</head>
+<body>
+    <ul id="ld" style="display: none;"></ul>
+    <table>
+        <tr style="height: 6pt;">
+            <img src="base.png"> Lcreator - Editor<div style="float: right;"><input type="text" style="font-family: monospace;" id="id" value="mod_id"> <button onclick="lsD();">Textures</button> <button onclick="genZip();">Export mod</button></div>
+        </tr>
+        <tr>
+          <td id="blocklyArea">Blockly will be positioned here.</td>
+        </tr>
+    </table>
+    <div id="blocklyDiv" style="position: absolute"></div>
+    <script src="main.js"></script>
+</body>
+</html>
