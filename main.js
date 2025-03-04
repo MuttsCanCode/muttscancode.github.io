@@ -504,7 +504,11 @@ function saveWorkspace() {
 
 function loadWorkspace() {
     const state = localStorage.getItem('dmworkspace-state');
-    Blockly.serialization.workspaces.load(JSON.parse(state), demoWorkspace);
+    if (state === null) {
+        Blockly.serialization.workspaces.load({}, demoWorkspace);
+    } else {
+        Blockly.serialization.workspaces.load(JSON.parse(state), demoWorkspace);
+    }
 }
 
 loadWorkspace();
