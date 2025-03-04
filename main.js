@@ -563,14 +563,14 @@ Blockly.defineBlocksWithJsonArray([{
   "colour": 180
 },{
   "type": "fuel",
-  "tooltip": "Registers an item as fuel",
+  "tooltip": "Registers an item/block as fuel",
   "helpUrl": "",
   "message0": "define %1 as fuel %2 burntime: %3 second(s) %4",
   "args0": [
     {
       "type": "field_input",
       "name": "NAME",
-      "text": "mymod:item1"
+      "text": `${document.getElementById('id').value}:item1`
     },
     {
       "type": "input_dummy",
@@ -601,7 +601,7 @@ Blockly.defineBlocksWithJsonArray([{
     {
       "type": "field_input",
       "name": "I",
-      "text": "modid:item1"
+      "text": `${document.getElementById('id').value}:item1`
     },
     {
       "type": "field_input",
@@ -747,33 +747,54 @@ cooktime = ${number_ctime},
 }
 
 var toolbox = {
-kind: 'flyoutToolbox',
-contents: [
-    {
-        kind: 'block',
-        type: 'node',
-    },
-    {
-        kind: 'block',
-        type: 'node2',
-    },
-    {
-      kind: 'block',
-      type: 'item',
-    },
-    {
-      kind: 'block',
-      type: 'shapedcraft',
-    },
-    {
-      kind: 'block',
-      type: 'cookingrecipe',
-    },
-    {
-      kind: 'block',
-      type: 'fuel',
-    }
-],
+    "kind": "categoryToolbox",
+    "contents": [
+      {
+        "kind": "category",
+        "name": "Nodes",
+        "categorystyle": "n_category",
+        "contents": [
+          {
+            "kind": "block",
+            "type": "node2"
+          },
+          {
+            "kind": "block",
+            "type": "node"
+          }
+        ]
+      },
+      {
+        "kind": "category",
+        "name": "Items",
+        "categorystyle": "i_category",
+        "contents": [
+          {
+            "kind": "block",
+            "type": "item"
+          },
+        ]
+      },
+      {
+        "kind": "category",
+        "name": "Recipes",
+        "categorystyle": "r_category",
+        "contents": [
+          {
+            "kind": "block",
+            "type": "shapedcraft"
+          },
+          {
+            "kind": "block",
+            "type": "cookingrecipe"
+          },
+          {
+            "kind": "block",
+            "type": "fuel"
+          }
+        ]
+      }
+    ]
 };
 
 const theme = Blockly.Theme.defineTheme('dark', {
@@ -791,9 +812,21 @@ const theme = Blockly.Theme.defineTheme('dark', {
       insertionMarkerOpacity: 0.3,
       scrollbarOpacity: 0.4,
       cursorColour: '#d0d0d0',
-      blackBackground: '#333',
-    }
+      blackBackground: '#000',
+    },
+    categoryStyles: {
+      'r_category': {
+         'colour': '180'
+      },
+      'i_category': {
+         'colour': '120',
+      },
+      'n_category': {
+         'colour': '225',
+      }
+   }
 });
+
 
 
 var blocklyArea = document.getElementById('blocklyArea');

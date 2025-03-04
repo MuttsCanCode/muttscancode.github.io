@@ -18,20 +18,245 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lcreator</title>
     <style>
+        html,
         body {
-            color: green;
+            color: rgb(255, 255, 255);
             background-color: black;
             font-family: monospace;
         }
-        h1 {
-            text-align: center;
+
+        button {
+        background-color: #ffffff;
+        border: none;
+        color: rgb(0, 0, 0);
+        padding: 2px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin: 4px 2px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-family: monospace;
         }
+
+        h1 {
+            color: chartreuse;
+        }
+
+        * {
+        box-sizing: border-box;
+        }
+
+        .img {
+            width: 640px;
+            margin: auto;
+            height: 480px;
+            vertical-align: middle;
+            object-fit: contain;
+        }
+
+        /* Position the image container (needed to position the left and right arrows) */
+        .container {
+        position: relative;
+        width: 80%;
+        margin: auto;
+        }
+
+        /* Hide the images by default */
+        .mySlides {
+        display: none;
+        }
+
+        /* Add a pointer when hovering over the thumbnail images */
+        .cursor {
+        cursor: pointer;
+        }
+
+        /* Next & previous buttons */
+        .prev,
+        .next {
+        cursor: pointer;
+        position: absolute;
+        top: 40%;
+        width: auto;
+        padding: 16px;
+        margin-top: -50px;
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+        -webkit-user-select: none;
+        }
+
+        /* Position the "next button" to the right */
+        .next {
+        right: 0;
+        border-radius: 3px 0 0 3px;
+        }
+
+        /* On hover, add a black background color with a little bit see-through */
+        .prev:hover,
+        .next:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Number text (1/3 etc) */
+        .numbertext {
+        color: #f2f2f2;
+        font-size: 12px;
+        padding: 8px 12px;
+        position: absolute;
+        top: 0;
+        }
+
+        /* Container for image text */
+        .caption-container {
+        text-align: center;
+        background-color: #222;
+        padding: 2px 16px;
+        color: white;
+        }
+
+        .row:after {
+        content: "";
+        display: table;
+        clear: both;
+        }
+
+        /* Six columns side by side */
+        .column {
+        float: left;
+        width: 16.6666666667%;
+        }
+
+        /* Add a transparency effect for thumnbail images */
+        .demo {
+        opacity: 0.6;
+        display: none;
+        }
+
+        .active,
+        .demo:hover {
+        opacity: 1;
+        }
+
+        /* unvisited link */
+        a:link {
+        color: rgb(255, 255, 255);
+        }
+
+        /* visited link */
+        a:visited {
+        color: rgb(255, 255, 255);
+        }
+
+        /* mouse over link */
+        a:hover {
+        color: rgb(189, 189, 189);
+        }
+
+        /* selected link */
+        a:active {
+        color: rgb(255, 255, 255);
+        } 
     </style>
 </head>
 <body>
-    <h1><img src="base.png"> Lcreator</h1>
-    <p>Make Luanti mods with no coding experince! <a href='editor.html'>Open editor</a></p>
+    <span style="font-size:20pt; color: chartreuse;"><img src="base.png"> Lcreator:</span><span style="font-size: larger;"> Make Luanti mods with blocks!</span><span style='float:right'><button onclick="location.href = 'editor.html';">Open editor</button></span>
+    <h2>Gallery</h2>
+    <div class="container">
+        <div class="mySlides">
+          <div class="numbertext">1 / 7</div>
+          <img class="img" src="pic/block1.png" style="width:100%">
+        </div>
+        <div class="mySlides">
+          <div class="numbertext">2 / 7</div>
+          <img class="img" src="pic/block2.png" style="width:100%">
+        </div>
+        <div class="mySlides">
+          <div class="numbertext">3 / 7</div>
+          <img class="img" src="pic/item.png" style="width:100%">
+        </div>
+        <div class="mySlides">
+          <div class="numbertext">4 / 7</div>
+          <img class="img" src="pic/cr3.png" style="width:100%">
+        </div>
+        <div class="mySlides">
+          <div class="numbertext">5 / 7</div>
+          <img class="img" src="pic/cr2.png" style="width:100%">
+        </div>
+        <div class="mySlides">
+          <div class="numbertext">6 / 7</div>
+          <img class="img" src="pic/cr.png" style="width:100%">
+        </div>
+        <div class="mySlides">
+            <div class="numbertext">7 / 7</div>
+            <img class="img" src="pic/cb.png" style="width:100%">
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">❮</a>
+        <a class="next" onclick="plusSlides(1)">❯</a>
+
+        <div class="caption-container">
+          <p id="caption"></p>
+        </div>
+
+        <div class="row">
+          <div class="column">
+            <img class="demo cursor" src="pic/block1.png" style="width:100%" onclick="currentSlide(1)" alt="Custom Blocks (1)">
+          <div class="column">
+            <img class="demo cursor" src="pic/block2.png" style="width:100%" onclick="currentSlide(2)" alt="Custom Blocks (2)">
+          </div>
+          <div class="column">
+            <img class="demo cursor" src="pic/item.png" style="width:100%" onclick="currentSlide(3)" alt="Custom Items">
+          </div>
+          <div class="column">
+            <img class="demo cursor" src="pic/cr3.png" style="width:100%" onclick="currentSlide(4)" alt="Custom Recipes (1)">
+          </div>
+          <div class="column">
+            <img class="demo cursor" src="pic/cr2.png" style="width:100%" onclick="currentSlide(5)" alt="Custom Recipes (2)">
+          </div>
+          <div class="column">
+            <img class="demo cursor" src="pic/cr.png" style="width:100%" onclick="currentSlide(6)" alt="Custom Recipes (3)">
+          </div>
+          <div class="column">
+            <img class="demo cursor" src="pic/cb.png" style="width:100%" onclick="currentSlide(7)" alt="Custom Fuel & Furnace Recipes">
+          </div>
+        </div>
+      </div>
+
+      <script>
+      let slideIndex = 1;
+      showSlides(slideIndex);
+      function plusSlides(n) {
+        showSlides(slideIndex += n);
+      }
+      function currentSlide(n) {
+        showSlides(slideIndex = n);
+      }
+      function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("demo");
+        let captionText = document.getElementById("caption");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";
+        dots[slideIndex-1].className += " active";
+        captionText.innerHTML = dots[slideIndex-1].alt;
+      }
+      </script>
+    </div>
 </body>
 </html>
