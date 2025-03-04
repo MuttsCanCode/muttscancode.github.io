@@ -406,6 +406,224 @@ Blockly.defineBlocksWithJsonArray([{
       }
     ],
     "colour": 225
+},
+{
+  "type": "item",
+  "tooltip": "Creates an item",
+  "helpUrl": "",
+  "message0": "item %1 id %2 %3 name %4 %5 image %6 %7",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "name": "NAME"
+    },
+    {
+      "type": "field_input",
+      "name": "ID",
+      "text": "item1"
+    },
+    {
+      "type": "input_dummy",
+      "name": "NID",
+      "align": "RIGHT"
+    },
+    {
+      "type": "field_input",
+      "name": "NAME",
+      "text": "Item #1 :)"
+    },
+    {
+      "type": "input_dummy",
+      "name": "NNAME",
+      "align": "RIGHT"
+    },
+    {
+      "type": "field_input",
+      "name": "IMG",
+      "text": "base"
+    },
+    {
+      "type": "input_dummy",
+      "name": "NIMG",
+      "align": "RIGHT"
+    }
+  ],
+  "colour": 120
+},
+{
+  "type": "alias",
+  "tooltip": "Creates an alias",
+  "helpUrl": "",
+  "message0": "alias:  %1 → %2 %3",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "I",
+      "text": "default:dirt"
+    },
+    {
+      "type": "field_input",
+      "name": "O",
+      "text": "dirt"
+    },
+    {
+      "type": "input_dummy",
+      "name": "MAIN"
+    }
+  ],
+  "colour": 180
+},{
+  "type": "shapedcraft",
+  "tooltip": "Defines a shaped crafting recipe",
+  "helpUrl": "",
+  "message0": "Shaped crafting recipe %1 output %2 x %3 %4 %5 %6 %7 %8 %9 %10 %11 %12 %13 %14 %15 %16",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "name": "NAME"
+    },
+    {
+      "type": "field_input",
+      "name": "OUT",
+      "text": "default:dirt"
+    },
+    {
+      "type": "field_number",
+      "name": "AMOUNT",
+      "value": 5,
+      "min": 1,
+      "max": 99
+    },
+    {
+      "type": "input_dummy",
+      "name": "OUT",
+      "align": "RIGHT"
+    },
+    {
+      "type": "field_input",
+      "name": "r1a",
+      "text": ""
+    },
+    {
+      "type": "field_input",
+      "name": "r1b",
+      "text": ""
+    },
+    {
+      "type": "field_input",
+      "name": "r1c",
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "name": "R1",
+      "align": "RIGHT"
+    },
+    {
+      "type": "field_input",
+      "name": "r2a",
+      "text": ""
+    },
+    {
+      "type": "field_input",
+      "name": "r2b",
+      "text": ""
+    },
+    {
+      "type": "field_input",
+      "name": "r2c",
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "name": "R2",
+      "align": "RIGHT"
+    },
+    {
+      "type": "field_input",
+      "name": "r3a",
+      "text": ""
+    },
+    {
+      "type": "field_input",
+      "name": "r3b",
+      "text": ""
+    },
+    {
+      "type": "field_input",
+      "name": "r3c",
+      "text": ""
+    },
+    {
+      "type": "input_dummy",
+      "name": "R3",
+      "align": "RIGHT"
+    }
+  ],
+  "colour": 180
+},{
+  "type": "fuel",
+  "tooltip": "Registers an item as fuel",
+  "helpUrl": "",
+  "message0": "define %1 as fuel %2 burntime: %3 second(s) %4",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "NAME",
+      "text": "mymod:item1"
+    },
+    {
+      "type": "input_dummy",
+      "name": "NAME"
+    },
+    {
+      "type": "field_number",
+      "name": "BTIME",
+      "value": 10,
+      "min": 0
+    },
+    {
+      "type": "input_dummy",
+      "name": "M1"
+    }
+  ],
+  "colour": 180
+},{
+  "type": "cookingrecipe",
+  "tooltip": "Defines a cooking recipe",
+  "helpUrl": "",
+  "message0": "cooking recipe %1 %2 → %3 %4 cooktime: %5 second(s) %6",
+  "args0": [
+    {
+      "type": "input_dummy",
+      "name": "NAME"
+    },
+    {
+      "type": "field_input",
+      "name": "I",
+      "text": "modid:item1"
+    },
+    {
+      "type": "field_input",
+      "name": "O",
+      "text": "default:coalblock"
+    },
+    {
+      "type": "input_dummy",
+      "name": "M1"
+    },
+    {
+      "type": "field_number",
+      "name": "CTIME",
+      "value": 5,
+      "min": 0
+    },
+    {
+      "type": "input_dummy",
+      "name": "M2"
+    }
+  ],
+  "colour": 180
 }]);
 
 lua.luaGenerator.forBlock['node'] = function(block) {
@@ -446,13 +664,87 @@ tiles = {"${text_yp}.png",    -- y+
         "${text_xp}.png", -- x+
         "${text_xm}.png",  -- x-
         "${text_zp}.png",  -- z+
-        "${text_zm}.png", -- z-},
+        "${text_zm}.png", -- z-
+        },
 groups = {${dropdown_grp} = ${number_hard}},
 is_ground_content = ${checkbox_isgnd.toLowerCase()},
 drop = '${text_did}'
 })`;
     return code;
   }
+
+lua.luaGenerator.forBlock['item'] = function(block) {
+  const text_id = block.getFieldValue('ID');
+  const text_name = block.getFieldValue('NAME');
+  const text_img = block.getFieldValue('IMG');
+
+  const code = `core.register_craftitem("$((ID:${text_id}", {
+description = "${text_name}",
+inventory_image = "${text_img}.png"
+})`;
+  return code;
+}
+
+lua.luaGenerator.forBlock['alias'] = function(block) {
+  const text_i = block.getFieldValue('I');
+  const text_o = block.getFieldValue('O');
+  const code = `core.register_alias("${text_o}", "${text_i}")
+`;
+  return code;
+}
+
+lua.luaGenerator.forBlock['shapedcraft'] = function(block) {
+  const text_out = block.getFieldValue('OUT');
+  const number_amount = block.getFieldValue('AMOUNT');
+
+  const text_r1a = block.getFieldValue('r1a');
+  const text_r1b = block.getFieldValue('r1b');
+  const text_r1c = block.getFieldValue('r1c');
+
+  const text_r2a = block.getFieldValue('r2a');
+  const text_r2b = block.getFieldValue('r2b');
+  const text_r2c = block.getFieldValue('r2c');
+
+  const text_r3a = block.getFieldValue('r3a');
+  const text_r3b = block.getFieldValue('r3b');
+  const text_r3c = block.getFieldValue('r3c');
+
+  const code = `core.register_craft({
+output = "${text_out} ${number_amount}",
+recipe = {
+    {"${text_r1a}", "${text_r1b}", "${text_r1c}"},
+    {"${text_r2a}", "${text_r2b}", "${text_r2c}"},
+    {"${text_r3a}", "${text_r3b}", "${text_r3c}"}
+}
+})`;
+  return code;
+}
+
+lua.luaGenerator.forBlock['fuel'] = function(block) {
+  const text_name = block.getFieldValue('NAME');
+  const number_btime = block.getFieldValue('BTIME');
+  const code = `core.register_craft({
+type = "fuel",
+recipe = "${text_name}",
+burntime = ${number_btime},
+})`;
+  return code;
+}
+
+lua.luaGenerator.forBlock['cookingrecipe'] = function(block) {
+  const text_i = block.getFieldValue('I');
+  const text_o = block.getFieldValue('O');
+
+  const number_ctime = block.getFieldValue('CTIME');
+
+  const code = `core.register_craft({
+type = "cooking",
+output = "${text_o}",
+recipe = "${text_i}",
+cooktime = ${number_ctime},
+})`;
+  return code;
+}
 
 var toolbox = {
 kind: 'flyoutToolbox',
@@ -464,6 +756,22 @@ contents: [
     {
         kind: 'block',
         type: 'node2',
+    },
+    {
+      kind: 'block',
+      type: 'item',
+    },
+    {
+      kind: 'block',
+      type: 'shapedcraft',
+    },
+    {
+      kind: 'block',
+      type: 'cookingrecipe',
+    },
+    {
+      kind: 'block',
+      type: 'fuel',
     }
 ],
 };
@@ -493,7 +801,14 @@ var blocklyDiv = document.getElementById('blocklyDiv');
 var demoWorkspace = Blockly.inject(blocklyDiv, {
     toolbox: toolbox,
     theme: 'dark',
-    renderer: 'thrasos'
+    renderer: 'thrasos',
+    move:{
+      scrollbars: {
+        horizontal: true,
+        vertical: true
+      },
+      drag: true,
+      wheel: false}
 });
 
 function saveWorkspace() {
